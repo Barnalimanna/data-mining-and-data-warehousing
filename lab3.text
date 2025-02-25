@@ -1,0 +1,12 @@
+///roll up sql command//
+select s.pro_id,sum(s.quantity) as total_quantity,sum(s.quantity*p.price) as total_sales from sales_table288 s 
+join product_table288 p on s.pro_id=p.pro_id group by rollup(s.pro_id);
+
+
+/// dril down sql command//
+select s.pro_id, c.cust_id, c.cust_name, sum(s.quantity) as total_quantity from sales_table288 s 
+join customer_table288 c on s.cust_id=c.cust_id group by s.pro_id,c.cust_id,c.cust_name
+order by s.pro_id,c.cust_id;
+
+///slice sql command//
+select * from sales_table288 where pro_id=1;
