@@ -10,3 +10,24 @@ order by s.pro_id,c.cust_id;
 
 ///slice sql command//
 select * from sales_table288 where pro_id=1;
+
+//Dice Operation//
+Retrieves sales data for:
+•	PRODUCT_ID = 1 (Laptop)
+•	CUSTOMER_ID = 101 (John Doe)
+SELECT * FROM SALES_TABLE 
+WHERE PRODUCT_ID = 1 
+AND CUSTOMER_ID = 101;
+
+//PIVOT Operation//
+Shows total quantity sold per product, with customers as columns.
+SELECT *
+FROM (
+    SELECT S.PRODUCT_ID, C.CUSTOMER_NAME, S.QUANTITY
+    FROM SALES_TABLE S
+    JOIN CUSTOMER_TABLE C ON S.CUSTOMER_ID = C.CUSTOMER_ID
+)
+PIVOT (
+    SUM(QUANTITY) FOR CUSTOMER_NAME IN ('John Doe' AS "John", 'Jane Smith' AS "Jane", 
+                                        'Robert Brown' AS "Robert", 'Emily Johnson' AS "Emily")
+);
